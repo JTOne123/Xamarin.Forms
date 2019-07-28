@@ -328,6 +328,8 @@ namespace Xamarin.Forms.Platform.iOS
 
 				if (_emptyViewFormsElement != null)
 				{
+					ItemsView.AddLogicalChild(_emptyViewFormsElement);
+
 					// Now that the native empty view's frame is sized to the UICollectionView, we need to handle
 					// the Forms layout for its content
 					_emptyViewFormsElement.Layout(_emptyUIView.Frame.ToRectangle());
@@ -339,6 +341,7 @@ namespace Xamarin.Forms.Platform.iOS
 				if (_currentBackgroundIsEmptyView)
 				{
 					CollectionView.BackgroundView = _backgroundUIView;
+					ItemsView.RemoveLogicalChild(_emptyViewFormsElement);
 				}
 
 				_currentBackgroundIsEmptyView = false;

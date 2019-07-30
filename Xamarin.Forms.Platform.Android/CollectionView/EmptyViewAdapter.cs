@@ -68,7 +68,7 @@ namespace Xamarin.Forms.Platform.Android
 				return;
 			}
 
-			if (holder is EmptyViewHolder emptyViewHolder)
+			if (holder is EmptyViewHolder emptyViewHolder && emptyViewHolder.View != null)
 			{
 				// For templated empty views, this will happen on bind. But if we just have a plain-old View,
 				// we need to add it as a "child" of the ItemsView here so that stuff like Visual and FlowDirection
@@ -132,7 +132,10 @@ namespace Xamarin.Forms.Platform.Android
 
 			public void Recycle(ItemsView itemsView)
 			{
-				itemsView.RemoveLogicalChild(View);
+				if (View != null)
+				{
+					itemsView.RemoveLogicalChild(View);
+				}
 			}
 		}
 	}
